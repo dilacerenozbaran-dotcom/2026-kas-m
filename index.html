@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dila Ceren Özbaran | Dijital CV & Portfolyo</title>
+    <meta name="description" content="Dila Ceren Özbaran - Kişisel web sitesi, dijital CV ve proje portfolyosu.">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        accent: {
+                            light: '#4f46e5', // Indigo 600
+                            dark: '#818cf8',  // Indigo 400
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Tema flash'ını önlemek için sayfa yüklenmeden önce tema kontrolü -->
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
+    <style>
+        /* Özel ince kaydırma çubuğu */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(156, 163, 175, 0.4);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(156, 163, 175, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-200 font-sans antialiased transition-colors duration-300 selection:bg-indigo-500/20 selection:text-indigo-600 dark:selection:text-indigo-400">
+
+    <!-- Üst Navigasyon (Sticky Navbar) -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-50/80 dark:bg-slate-950/80 border-b border-slate-200/70 dark:border-slate-800/70 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo / İsim -->
+                <a href="#" class="text-lg font-bold tracking-tight text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                    DCÖ<span class="text-indigo-600 dark:text-indigo-400">.</span>
+                </a>
+
+                <!-- Masaüstü Menü -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#hakkimda" class="text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Hakkımda</a>
+                    <a href="#deneyim" class="text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Deneyim</a>
+                    <a href="#projeler" class="text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Projeler</a>
+                    <a href="#yetenekler" class="text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Yetenekler</a>
+                    <a href="#iletisim" class="text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">İletişim</a>
+                </nav>
+
+                <!-- Sağ Kontroller: Tema Değiştirici & Mobil Menü Butonu -->
+                <div class="flex items-center space-x-3">
+                    <button id="theme-toggle" aria-label="Temayı Değiştir" class="p-2 rounded-xl bg-slate-200/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:bg-slate-300/70 dark:hover:bg-slate-700/70 transition-colors">
+                        <!-- Güneş İkonu (Dark modda görünür) -->
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <!-- Ay İkonu (Light modda görünür) -->
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Mobil Menü Butonu -->
+                    <button id="mobile-menu-btn" aria-label="Menüyü Aç" class="md:hidden p-2 rounded-xl bg-slate-200/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobil Açılır Menü -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 space-y-2">
+            <a href="#hakkimda" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60">Hakkımda</a>
+            <a href="#deneyim" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60">Deneyim</a>
+            <a href="#projeler" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60">Projeler</a>
+            <a href="#yetenekler" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60">Yetenekler</a>
+            <a href="#iletisim" class="mobile-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800/60">İletişim</a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. HERO BÖLÜMÜ -->
+        <section class="py-20 sm:py-28 flex flex-col justify-center">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs font-medium w-fit mb-6">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
+                </span>
+                <span>Yeni fırsatlara & iş birliklerine açık</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
+                Dila Ceren Özbaran
+            </h1>
+
+            <!-- NOT: Buradaki unvanı kendi uzmanlık alanına göre güncelleyebilirsin -->
+            <h2 class="text-xl sm:text-2xl font-medium text-indigo-600 dark:text-indigo-400 mb-6">
+                Yazılım Geliştirici &amp; Dijital Ürün Tasarımcısı
+            </h2>
+
+            <p class="max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+                Kullanıcı odaklı, estetik ve ölçeklenebilir dijital deneyimler tasarlayıp geliştiriyorum. Karmaşık problemleri sade, anlaşılır ve etkili çözümlere dönüştürmeyi seviyorum.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+                <a href="#iletisim" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm shadow-sm shadow-indigo-500/20 transition-all hover:-translate-y-0.5">
+                    İletişime Geç
+                </a>
+                <!-- NOT: LinkedIn profil URL'ni doğrudan kendi profil linkinle değiştirebilirsin -->
+                <a href="https://www.linkedin.com/search/results/all/?keywords=Dila%20Ceren%20%C3%96zbaran" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-slate-700 dark:text-slate-200 font-medium text-sm transition-all hover:-translate-y-0.5">
+                    <svg class="w-4 h-4 mr-2 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                    LinkedIn Profilim
+                </a>
+            </div>
+        </section>
+
+        <!-- 2. HAKKIMDA BÖLÜMÜ -->
+        <section id="hakkimda" class="py-16 border-t border-slate-200/70 dark:border-slate-800/70">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
+                <span class="w-8 h-1 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-3"></span>
+                Hakkımda
+            </h3>
+            <div class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-sm">
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                    Merhaba! Ben Dila Ceren Özbaran. Teknoloji ve tasarımı bir araya getirerek modern web uygulamaları ve dijital ürünler geliştiriyorum. Detaylara verdiğim önem, analitik düşünce yapım ve sürekli öğrenme tutkumla çalıştığım projelere değer katmayı hedefliyorum.
+                </p>
+                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <!-- NOT: Burayı kendi eğitim, ilgi alanları veya kariyer hedefinle özelleştirebilirsin -->
+                    Takım çalışmasına yatkın, güncel teknolojileri yakından takip eden ve kullanıcı deneyimini her zaman ön planda tutan bir yaklaşım benimsiyorum.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. DENEYİM BÖLÜMÜ (Timeline) -->
+        <section id="deneyim" class="py-16 border-t border-slate-200/70 dark:border-slate-800/70">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center">
+                <span class="w-8 h-1 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-3"></span>
+                Deneyim
+            </h3>
+
+            <div class="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 space-y-10">
+                <!-- Deneyim 1 (Özelleştirilebilir) -->
+                <div class="relative pl-8">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-600 dark:bg-indigo-400 ring-4 ring-slate-50 dark:ring-slate-950"></span>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
+                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Kıdemli / Uzman Pozisyon Adı</h4>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-fit mt-1 sm:mt-0">2024 - Günümüz</span>
+                    </div>
+                    <p class="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2">Şirket / Kurum Adı</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Burada sorumluluklarını, yönettiğin süreçleri ve elde ettiğin somut başarıları kısaca özetleyebilirsin.
+                    </p>
+                </div>
+
+                <!-- Deneyim 2 (Özelleştirilebilir) -->
+                <div class="relative pl-8">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-300 dark:bg-slate-700 ring-4 ring-slate-50 dark:ring-slate-950"></span>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-1">
+                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">Önceki Pozisyon Adı</h4>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 w-fit mt-1 sm:mt-0">2022 - 2024</span>
+                    </div>
+                    <p class="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-2">Önceki Şirket Adı</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                        Kullandığın teknolojiler, ekip içi katkılar ve geliştirdiğin projeler hakkında kısa bir açıklama.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. PROJELER / İŞLERİM BÖLÜMÜ -->
+        <section id="projeler" class="py-16 border-t border-slate-200/70 dark:border-slate-800/70">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center">
+                <span class="w-8 h-1 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-3"></span>
+                Projeler &amp; İşlerim
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Proje Kartı 1 -->
+                <article class="group bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all hover:-translate-y-1 shadow-sm">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" class="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+                                </a>
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Canlı Demo" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Proje Başlığı 1</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Projenin amacını, çözdüğü problemi ve senin bu projedeki rolünü anlatan kısa bir açıklama.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">HTML/CSS</span>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">JavaScript</span>
+                    </div>
+                </article>
+
+                <!-- Proje Kartı 2 -->
+                <article class="group bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all hover:-translate-y-1 shadow-sm">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repo" class="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Proje Başlığı 2</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Tasarladığın veya geliştirdiğin ikinci bir projenin öne çıkan özelliklerini buraya ekleyebilirsin.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">React</span>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Tailwind</span>
+                    </div>
+                </article>
+
+                <!-- Proje Kartı 3 -->
+                <article class="group bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 flex flex-col justify-between hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all hover:-translate-y-1 shadow-sm">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Canlı Demo" class="p-2 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Proje Başlığı 3</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                            Üçüncü bir çalışma, araştırma veya tasarım projenin kısa özeti ve elde edilen sonuçlar.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">UI/UX</span>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Figma</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 5. YETENEKLER BÖLÜMÜ -->
+        <section id="yetenekler" class="py-16 border-t border-slate-200/70 dark:border-slate-800/70">
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-8 flex items-center">
+                <span class="w-8 h-1 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-3"></span>
+                Yetenekler
+            </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Kategori 1 -->
+                <div class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Geliştirme</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">HTML5 &amp; CSS3</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">JavaScript</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">React</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <!-- Kategori 2 -->
+                <div class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Tasarım &amp; Araçlar</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">Figma</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">UI/UX Tasarımı</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">Git &amp; GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Kategori 3 -->
+                <div class="bg-white dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6">
+                    <h4 class="text-sm font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-4">Kişisel &amp; Dil</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">Proje Yönetimi</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">İngilizce</span>
+                        <span class="px-3 py-1.5 rounded-lg text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">Problem Çözme</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. İLETİŞİM BÖLÜMÜ -->
+        <section id="iletisim" class="py-16 border-t border-slate-200/70 dark:border-slate-800/70">
+            <div class="bg-indigo-600 dark:bg-indigo-950/80 border border-indigo-500/30 rounded-3xl p-8 sm:p-12 text-center text-white shadow-lg shadow-indigo-500/10">
+                <h3 class="text-2xl sm:text-3xl font-bold mb-4">Birlikte Çalışalım</h3>
+                <p class="text-indigo-100 dark:text-indigo-200 max-w-xl mx-auto mb-8 text-sm sm:text-base">
+                    Yeni projeler, iş fırsatları veya sadece tanışmak için benimle her zaman iletişime geçebilirsin.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                    <!-- E-posta Kopyalama Butonu (NOT: E-posta adresini kendi adresinle değiştir) -->
+                    <button id="copy-email-btn" data-email="ornek@dilacerenozbaran.com" class="inline-flex items-center px-5 py-3 rounded-xl bg-white text-indigo-600 font-medium text-sm hover:bg-indigo-50 transition-all shadow-sm">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        E-postayı Kopyala
+                    </button>
+
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/search/results/all/?keywords=Dila%20Ceren%20%C3%96zbaran" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-3 rounded-xl bg-indigo-500/40 hover:bg-indigo-500/60 border border-white/20 text-white font-medium text-sm transition-all">
+                        LinkedIn
+                    </a>
+
+                    <!-- GitHub (NOT: Kullanıcı adını kendi GitHub hesabınla değiştir) -->
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-5 py-3 rounded-xl bg-indigo-500/40 hover:bg-indigo-500/60 border border-white/20 text-white font-medium text-sm transition-all">
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200/70 dark:border-slate-800/70 py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p>&copy; <span id="current-year"></span> Dila Ceren Özbaran. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Bildirim Kutusu (Toast) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-lg text-sm font-medium flex items-center space-x-2">
+        <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span>E-posta adresi panoya kopyalandı!</span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Yılı otomatik güncelle
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Tema Değiştirici Mantığı
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+
+        function updateThemeIcons() {
+            if (document.documentElement.classList.contains('dark')) {
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                lightIcon.classList.add('hidden');
+                darkIcon.classList.remove('hidden');
+            }
+        }
+        updateThemeIcons();
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+            updateThemeIcons();
+        });
+
+        // Mobil Menü Mantığı
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // E-posta Kopyalama & Toast Bildirimi
+        const copyBtn = document.getElementById('copy-email-btn');
+        const toast = document.getElementById('toast');
+
+        copyBtn.addEventListener('click', () => {
+            const email = copyBtn.getAttribute('data-email');
+            const tempInput = document.createElement('input');
+            tempInput.value = email;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
